@@ -1,0 +1,152 @@
+// 动态表单
+.dynamicForm {
+  padding: 30rpx;
+  background: #ffffff;
+  overflow: auto;
+  box-sizing: border-box;
+
+  .bigTitle {
+    font-size: 34rpx;
+    margin: 20rpx 0 10rpx 0;
+    font-weight: 600;
+  }
+
+  /deep/ .u-radio-group--row {
+    justify-content: flex-end;
+
+    .u-radio {
+      &>text {
+        margin: 0 10rpx 0 0;
+      }
+    }
+  }
+
+  /deep/ .u-radio-group {
+    justify-content: flex-end;
+  }
+
+  /deep/ .u-form-item__body__right__content__slot {
+    justify-content: flex-end !important;
+    display: flex;
+
+    .u-checkbox-group {
+      justify-content: flex-end;
+      flex-wrap: wrap;
+
+      .u-checkbox-label--right {
+        margin: 0 0 10rpx 20rpx;
+
+        &>text {
+          margin: 0 10rpx 0 0;
+        }
+      }
+    }
+
+    .u-radio-group {
+      .u-radio-label--right {
+        margin-right: 0 !important;
+        margin: 10rpx 0 10rpx 20rpx;
+      }
+    }
+  }
+
+  .select-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .disabled-text {
+    text-align: right;
+    font-size: 24rpx;
+  }
+
+  /deep/ input {
+    background: #fff !important;
+
+    &:disabled {
+      background: #fff !important;
+    }
+
+  }
+
+  .dynamic {
+    display: flex;
+    justify-content: flex-end;
+
+    /deep/ &>.u-icon {
+      align-self: flex-end;
+      margin: 0 0 4rpx 18rpx;
+    }
+
+    .dynamic-input {
+      display: flex;
+      justify-content: flex-end;
+
+      /deep/ &>.u-icon {
+        margin: 0 0 0 10rpx;
+      }
+    }
+  }
+
+  .viewBreak {
+    /deep/ .u-form-item__body {
+      display: block;
+
+      .u-form-item__body__left {
+        width: 100% !important;
+        margin-bottom: 20rpx !important;
+      }
+
+      .u-form-item__body__right {
+        .u-form-item__body__right__content__slot {
+          justify-content: flex-start !important;
+
+          .u-checkbox-group {
+            justify-content: flex-start;
+
+            .u-checkbox-label--right {
+              margin: 10rpx 20rpx 10rpx 0rpx;
+
+              &>text {
+                margin: 0 10rpx 0 0;
+              }
+
+            }
+          }
+
+          .u-radio-group {
+            justify-content: flex-start;
+
+            .u-radio-label--right {
+              margin: 10rpx 20rpx 10rpx 0rpx;
+
+              &>text {
+                margin: 0 10rpx 0 0;
+              }
+
+              &:not(:first-child) {
+                margin-left: 20rpx;
+              }
+            }
+          }
+
+          .disabled-text {
+            text-align: left;
+          }
+        }
+
+        .dynamic {
+          .dynamic-left {
+            width: 100%;
+
+            .u-input__content__field-wrapper__field {
+              text-align: left !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

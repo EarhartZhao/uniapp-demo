@@ -1,0 +1,50 @@
+page {
+  background-color: #F0F1F6;
+}
+
+/* 主题设置 */
+
+.main-color {
+  color: $color-1 !important;
+}
+
+// view, text{
+//   @extend .font-l2;
+// }
+
+// 全局背景
+.main {
+  width: 710rpx !important;
+  margin: auto;
+}
+
+un-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.main-bg {
+  @extend .main;
+  border-radius: 25rpx 25rpx 0 0;
+  overflow: hidden;
+  height: 100%;
+  background-color: #fff;
+}
+
+// 有阴影白色块背景
+.bg {
+  @extend .main;
+  background-color: #fff;
+  border-radius: 14rpx;
+  box-shadow: 0rpx 8rpx 20rpx rgba(0, 0, 0, 0.16);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+
+.bg-f-h {
+  height: calc(100vh - 130rpx) !important;
+  margin: 0 0 28rpx 0;
+}
+

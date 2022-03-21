@@ -1,0 +1,42 @@
+.info {
+  @extend .flex-l;
+  padding: 40rpx 10rpx 40rpx 80rpx;
+  background-color: #fff;
+
+  .info-img {
+    width: 200rpx;
+    height: 200rpx;
+  }
+
+  .info-right {
+    @include ml-(60);
+    width: 400rpx;
+
+    .info-name {
+      @include mt-(30);
+    }
+
+    .info-func {
+      @include mt-(20);
+
+      &>view {
+        @extend .font-l2,
+        .inline-block;
+      }
+
+      .small-btn {
+        @include ml-(20);
+      }
+    }
+  }
+}
+
+.page-list {
+  background-color: #fff;
+  @include mt-(30);
+
+  .cell-right {
+    @extend .font-l2;
+    color: red;
+  }
+}

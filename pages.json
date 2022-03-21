@@ -1,0 +1,58 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "说明"
+			}
+		},
+		{
+			"path": "pages/components/dynamicForm/index",
+			"style": {
+				"navigationBarTitleText": "动态表单"
+			}
+		},
+		{
+			"path": "pages/components/timeRange/index",
+			"style": {
+				"navigationBarTitleText": "时间范围组件"
+			}
+		},
+		{
+			"path": "pages/index/funcList",
+			"style": {
+				"navigationBarTitleText": "功能"
+			}
+		}
+		
+	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#4199FF",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "说明",
+				"iconPath": "static/indexIcon/index1.png",
+				"selectedIconPath": "static/indexIcon/indexc1.png"
+			},
+			{
+				"pagePath": "pages/index/funcList",
+				"text": "功能",
+				"iconPath": "static/indexIcon/index2.png",
+				"selectedIconPath": "static/indexIcon/indexc2.png"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uniapp-demo",
+		"navigationBarBackgroundColor": "#4199FF",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	}
+}

@@ -1,0 +1,21 @@
+// 全局按钮
+.main-btn {
+  background-color: $color-1 !important;
+  color: #fff !important;
+  border: none;
+  margin: 20rpx auto 0 auto;
+  @include h-lh-(70);
+  @include border-r-(10);
+  @extend .main, .font-l3;
+}
+
+.small-btn {
+  background-color: $color-1 !important;
+  @extend .font-l2,
+  .inline-block,
+  .pointer;
+  @include h-lh-(50);
+  @include plr-(20);
+  @include border-r-(6);
+  color: #fff;
+}

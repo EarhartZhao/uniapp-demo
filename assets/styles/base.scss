@@ -1,0 +1,320 @@
+
+$white: #ffffff;
+$grey: #c0c4cc;
+$black: #000;
+$normalFonts: #1a1a1a;
+$color-1: #4199FF; //主要颜色
+$color-2: #303133; //次要颜色
+$color-3: #19be6b; //次要颜色
+$color-4: #fa3534; //次要颜色
+
+.color-1{
+  color: $color-1;
+}
+.color-2{
+  color: $color-2;
+}
+
+.font-l1{
+  font-size: 20rpx;
+}
+.font-l2{
+  font-size: 24rpx;
+}
+.font-l3{
+  font-size: 30rpx;
+}
+.font-l4{
+  font-size: 34rpx;
+}
+.font-l5{
+  font-size: 40rpx;
+}
+
+
+@mixin ptb-($font) {
+  padding: #{$font}rpx 0;
+}
+
+@mixin plr-($font) {
+  padding: 0 #{$font}rpx;
+}
+
+@mixin pd-($font) {
+  padding: #{$font}rpx;
+}
+
+@mixin pl-($font) {
+  padding-left: #{$font}rpx;
+}
+
+@mixin pr-($font) {
+  padding-right: #{$font}rpx;
+}
+
+@mixin pt-($font) {
+  padding-top: #{$font}rpx;
+}
+
+@mixin pb-($font) {
+  padding-bottom: #{$font}rpx;
+}
+
+@mixin mtb-($font) {
+  margin: #{$font}rpx 0;
+}
+
+@mixin mlr-($font) {
+  margin: 0 #{$font}rpx;
+}
+
+@mixin m-($font) {
+  margin: #{$font}rpx;
+}
+
+@mixin md-($font) {
+  margin: #{$font}rpx;
+}
+
+@mixin ml-($font) {
+  margin-left: #{$font}rpx;
+}
+
+@mixin mr-($font) {
+  margin-right: #{$font}rpx;
+}
+
+@mixin mt-($font) {
+  margin-top: #{$font}rpx;
+}
+
+@mixin mb-($font) {
+  margin-bottom: #{$font}rpx;
+}
+
+@mixin w-($font) {
+  width: #{$font}rpx;
+}
+
+@mixin w-vw-($font) {
+  width: #{$font}vw;
+}
+
+@mixin h-($font) {
+  height: #{$font}rpx;
+}
+
+@mixin h-vh-($font) {
+  height: #{$font}vh;
+}
+
+@mixin lh-($font) {
+  line-height: #{$font}rpx;
+}
+
+@mixin h-lh-($font) {
+  line-height: #{$font}rpx;
+  height: #{$font}rpx;
+}
+
+
+@mixin l-($font) {
+  left: #{$font}rpx;
+}
+
+@mixin r-($font) {
+  right: #{$font}rpx;
+}
+
+@mixin t-($font) {
+  top: #{$font}rpx;
+}
+
+@mixin b-($font) {
+  bottom: #{$font}rpx;
+}
+
+@mixin border-r-($font) {
+  border-radius: #{$font}rpx;
+}
+
+.font-w {
+  font-weight: bold;
+}
+
+.border-r-h {
+  border-radius: 50%;
+}
+
+.align-l {
+  text-align: left;
+}
+
+.align-c {
+  text-align: center;
+}
+
+.align-r {
+  text-align: right;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.w-f {
+  width: 100%;
+}
+
+.w-h {
+  width: 50%;
+}
+
+.h-f {
+  height: 100%;
+}
+
+.h-h {
+  height: 50%;
+}
+
+.li-f {
+  line-height: 100%;
+}
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.clearfix,
+.clear {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// flex布局 上下居中
+.flex-l-c {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-l {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-r-c {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-r {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-c-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-c {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-b-c {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-b {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-a-c {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+// flex布局 超出换行
+.flex-l-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.flex-r-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.flex-c-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-b-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-a-w {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
