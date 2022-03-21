@@ -68,6 +68,7 @@ export default {
   watch: {
     value: {
       handler(val) {
+        console.log('value', val)
         if (val && val.length == 2) this.timerang = this.handleTime(val);
       },
       deep: true,

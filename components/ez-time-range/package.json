@@ -8,7 +8,7 @@
     "ez-time-range",
     "时间范围"
   ],
-  "repository": "",
+  "repository": "https://github.com/EarhartZhao/uniapp-demo/tree/main/components/ez-time-range",
   "engines": {
     "HBuilderX": "^3.1.0"
   },
