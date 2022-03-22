@@ -16,7 +16,7 @@
         <u-form-item
           :label="item.title"
           :prop="[item.key]"
-          :required="item.rule.required"
+          :required="item.rule.required && !disabled"
           class="testclass"
           borderBottom
         >

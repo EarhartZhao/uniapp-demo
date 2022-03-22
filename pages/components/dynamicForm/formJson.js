@@ -209,7 +209,7 @@ export default [
     },
     placeholder: "请选择",
     rule: {
-      type: "string",
+      type: "array",
       required: true,
       message: "timerang该字段必填",
       trigger: ["change"],

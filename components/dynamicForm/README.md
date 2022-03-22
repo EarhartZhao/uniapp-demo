@@ -79,5 +79,5 @@ export default {
 
 ### 其他
 
-> 范围日期时间组件使用的是 uniapp 的 uni-datetime-picker 组件 
-> 时间范围组件是基于 uview2 的自封装组件 
+> 范围日期时间组件使用的是 uniapp 的 uni-datetime-picker 组件  
+> 时间范围组件是基于 ez-time-range 组件  
