@@ -64,6 +64,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    title: {
+      type: String,
+      default: '',
+    },
   },
   watch: {
     value: {
@@ -76,7 +80,7 @@ export default {
   },
   data() {
     return {
-      timerang: ["9", "00", "0", "18", "00"], //默认结束开始时间
+      timerang: [9, 0, 0, 18, 0], //默认结束开始时间
       minutes: Array.from(Array(60), (v, k) => (k + "").padStart(2, "0")),
       hoursList: Array.from(Array(24), (v, k) => (k + "").padStart(2, "0")),
     };
@@ -87,9 +91,9 @@ export default {
     },
     handleTime(val) {
       return []
-        .concat(val[0].split(":"))
-        .concat(["0"])
-        .concat(val[1].split(":"));
+        .concat(val[0].split(":").flatMap(ele=>Number(ele)))
+        .concat([0])
+        .concat(val[1].split(":").flatMap(ele=>Number(ele)));
     },
     closeHandler() {
       this.$emit("close");
