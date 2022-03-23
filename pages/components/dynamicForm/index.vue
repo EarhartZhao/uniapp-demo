@@ -37,9 +37,15 @@ export default {
   data() {
     return {
       formJson,
-      mockData,
+      mockData:{},
       disabled: true,
     };
+  },
+  created(){
+    setTimeout(() => {
+      this.mockData = mockData;
+      console.log('this.mockData', this.mockData)
+    }, 3000);
   },
   methods: {
     submit() {

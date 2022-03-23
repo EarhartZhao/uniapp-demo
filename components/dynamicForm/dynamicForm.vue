@@ -321,8 +321,18 @@ export default {
       form: {},
       rules: {},
       popShow: {},
-      validateList:[],
+      validateList: [],
     };
+  },
+  watch: {
+    formData: {
+      handler(val) {
+        if (JSON.stringify(val) != "{}")
+          this.$data.form = JSON.parse(JSON.stringify(this.formData));
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   onReady() {
     // 如果需要兼容微信小程序，并且校验规则中含有方法等，只能通过setRules方法设置规则
@@ -346,6 +356,7 @@ export default {
     },
     arrayDisabledText(vkey, val, key, arr) {
       let text = "";
+      if (!val) return null;
       val.forEach((ele, i) => {
         text += this.byKeyFindVal(vkey, ele, key, arr) + ",";
       });
@@ -393,10 +404,10 @@ export default {
     initializeForm() {
       let rules = {},
         form = {},
-        validateList = []
+        validateList = [];
       this.formJson.forEach((ele) => {
         if (JSON.stringify(ele.rule) != "{}") rules[ele.key] = ele.rule;
-        validateList.push(ele.key)
+        validateList.push(ele.key);
         switch (ele.type) {
           case "dynamicInput":
             form[ele.key] = [];
@@ -416,9 +427,6 @@ export default {
       this.$set(this, "rules", rules);
       this.$set(this, "form", form);
       this.$set(this, "validateList", validateList);
-
-      if (JSON.stringify(this.formData) != "{}")
-        this.$data.form = JSON.parse(JSON.stringify(this.formData));
     },
     submit() {
       // console.log("initializeForm submit", this.form);
