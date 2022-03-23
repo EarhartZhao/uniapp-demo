@@ -11,7 +11,7 @@
       <picker-view
         class="time-rang-picker"
         :value="timerang"
-        @change="() => {}"
+        @change="changeTimeRange"
         indicator-style="height:30px;"
       >
         <picker-view-column>
@@ -68,7 +68,6 @@ export default {
   watch: {
     value: {
       handler(val) {
-        console.log('value', val)
         if (val && val.length == 2) this.timerang = this.handleTime(val);
       },
       deep: true,
@@ -78,11 +77,14 @@ export default {
   data() {
     return {
       timerang: ["9", "00", "0", "18", "00"], //默认结束开始时间
-      minutes: Array.from(Array(59), (v, k) => (k + "").padStart(2, "0")),
-      hoursList: Array.from(Array(23), (v, k) => (k + "").padStart(2, "0")),
+      minutes: Array.from(Array(60), (v, k) => (k + "").padStart(2, "0")),
+      hoursList: Array.from(Array(24), (v, k) => (k + "").padStart(2, "0")),
     };
   },
   methods: {
+    changeTimeRange(e){
+      this.timerang = e.detail.value
+    },
     handleTime(val) {
       return []
         .concat(val[0].split(":"))
@@ -95,11 +97,14 @@ export default {
     cancel() {
       this.$emit("cancel");
     },
+    toString(i){
+      return this.timerang[i].toString();
+    },
     confirm() {
-      let val = this.timerang;
+      const toString = this.toString
       let timerang = [
-        `${val[0].padStart(2, "0") + ":" + val[1].padStart(2, "0")}`,
-        `${val[3].padStart(2, "0") + ":" + val[4].padStart(2, "0")}`,
+        `${toString(0).padStart(2, "0") + ":" + toString(1).padStart(2, "0")}`,
+        `${toString(3).padStart(2, "0") + ":" + toString(4).padStart(2, "0")}`,
       ];
       this.$emit("confrim", { value: timerang });
     },
