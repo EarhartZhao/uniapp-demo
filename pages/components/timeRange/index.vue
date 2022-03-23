@@ -13,6 +13,7 @@
       :value="timeRange"
       @confrim="confrim"
       @cancel="show = false"
+      @close="show = false"
       :show="show"
     ></ez-time-range>
   </view>
