@@ -11,6 +11,9 @@
 |String|height|表单高度|
 |Number|labelWidth|表单label的宽度|
 |String|errorType|错误类型，可选值：message border-bottom none|
+|Function|submit|提交验证表单，返回promise，通过refs调用 Vue.refs['组件ref'].submit()|
+|Function|asyncSetFormJsonDataArr|动态添加selete类型等的数据 Vue.$refs['组件ref'].asyncSetFormJsonDataArr(key,arr) key:目标key arr:设置的数组，select类型需要注意是二维数组|
+|Function|initializeForm|初始化方法|
 
 ### formJson 字段配置说明
 

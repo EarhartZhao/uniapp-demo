@@ -342,12 +342,18 @@ export default {
     this.initializeForm();
   },
   methods: {
+    asyncSetFormJsonDataArr(key, arr) {
+      const i = this.formJson.findIndex((ele) => ele.key == key);
+      if (i == -1) return;
+      this.$set(this.formJson[i].itemObj, "dataArr", arr);
+      this.initializeForm();
+    },
     filterTimerang(val) {
       if (Array.isArray(val) && val.length == 2) return val[0] + " - " + val[1];
       return "";
     },
     byKeyFindVal(key, sameKey, valueKey, arr) {
-      if (arr.length === 0) return "";
+      if (!arr || arr.length === 0) return "";
       try {
         return arr.filter((ele) => ele[key] == sameKey)[0][valueKey];
       } catch (e) {
