@@ -1,5 +1,5 @@
 <template>
-  <view class="dynamicForm" :style="{ height: height }">
+  <view class="ez-dynamic-form" :style="{ height: height }">
     <u--form
       labelPosition="left"
       :errorType="errorType"

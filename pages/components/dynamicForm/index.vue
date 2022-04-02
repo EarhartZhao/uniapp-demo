@@ -1,6 +1,6 @@
 <template>
   <view>
-    <dynamicForm
+    <ez-dynamic-form
       :formJson="formJson"
       :formData="mockData"
       :disabled="disabled"
@@ -9,7 +9,7 @@
       ref="dynamicForm"
     >
     <view name="btn" @click="clickBtn">btn</view>
-    </dynamicForm>
+    </ez-dynamic-form>
     <formBottom>
       <u-button
         v-if="!disabled"
