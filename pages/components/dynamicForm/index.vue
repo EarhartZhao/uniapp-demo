@@ -7,7 +7,9 @@
       :labelWidth="150"
       height="calc(100vh - 100rpx)"
       ref="dynamicForm"
-    />
+    >
+    <view name="btn" @click="clickBtn">btn</view>
+    </dynamicForm>
     <formBottom>
       <u-button
         v-if="!disabled"
@@ -48,6 +50,9 @@ export default {
     }, 3000);
   },
   methods: {
+    clickBtn(){
+      console.log('click slot btn')
+    },
     submit() {
       this.$refs.dynamicForm.submit().then((r) => {
         console.log("formData", r);

@@ -5,6 +5,7 @@ export default [
     key: "input",
     itemObj: {
       type: "text",
+      slot: "btn"
     },
     placeholder: "请输入",
     rule: {

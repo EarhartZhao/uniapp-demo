@@ -36,6 +36,20 @@
             form[item.key]
           }}</view>
 
+          <!-- 动态slot -->
+          <view class="dynamic-slot" v-if="item.itemObj.slot">
+            <view slot="right">
+              <!-- #ifdef MP -->
+              <slot name="{{item.itemObj.slot}}"> </slot>
+              <!-- #endif -->
+
+              <!-- #ifdef H5 || APP-PLUS  -->
+              <!-- <slot :name="item.name"> -->
+              <slot :name="item.itemObj.slot"></slot>
+              <!-- #endif -->
+            </view>
+          </view>
+
           <!-- 多行输入框 -->
           <u--textarea
             v-if="item.type == 'textarea' && !disabled"
@@ -328,7 +342,7 @@ export default {
     formData: {
       handler(val) {
         if (JSON.stringify(val) != "{}")
-          this.$data.form = JSON.parse(JSON.stringify(this.formData));
+          this.$data.form = JSON.parse(JSON.stringify(val));
       },
       deep: true,
       immediate: true,
@@ -369,7 +383,6 @@ export default {
       return text.slice(0, -1);
     },
     inputChange(e, key, i, iKey) {
-      // console.log('inputChange', e, key, i, iKey)
       if (iKey) {
         this.form[key][i][iKey] = e;
       } else {
@@ -404,7 +417,6 @@ export default {
       return m < 10 ? "0" + m : m;
     },
     pickerConfirm(e, key, valueKey) {
-      // console.log("picker", e, key, valueKey);
       this.$set(this.form, key, e.value[0][valueKey]);
     },
     initializeForm() {
@@ -434,13 +446,14 @@ export default {
       this.$set(this, "form", form);
       this.$set(this, "validateList", validateList);
     },
+    returnFormData(){
+      return this.form;
+    },
     submit() {
-      // console.log("initializeForm submit", this.form);
       return new Promise((resolve, reject) => {
         this.$refs.formRef
           .validate()
           .then((res) => {
-            // console.log("dynamicForm formData", this.form);
             resolve(this.form);
           })
           .catch((errors) => {
@@ -449,6 +462,7 @@ export default {
           });
       });
     },
+    // TODO 预留功能 暂未实现
     reset() {
       this.$refs.formRef.resetFields();
       this.$refs.formRef.clearValidate();

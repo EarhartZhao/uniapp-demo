@@ -5,15 +5,16 @@
 
 |类型|字段|注解|
 |:-|:-|:-|
-|Array|formJson|生成表单配置数据|
-|Object|formData|表单数据值，用来展示默认数据，如果不需要默认展示可不传|
+|Array|formJson|生成表单配置数据 若需要异步动态配置多个dataArr，建议全部获取之后再赋值 formJson ，并调用 initializeForm 方法|
+|Object|formData|表单数据值，用来展示默认数据，如果不需要默认展示可不传 *注意：若使用 initializeForm 方法，该变量赋值需要再 initializeForm 后执行|
 |Boolean|disabled|用来控制当前表单状态，true 为展示状态，false 为编辑状态|
 |String|height|表单高度|
 |Number|labelWidth|表单label的宽度|
 |String|errorType|错误类型，可选值：message border-bottom none|
 |Function|submit|提交验证表单，返回promise，通过refs调用 Vue.refs['组件ref'].submit()|
 |Function|asyncSetFormJsonDataArr|动态添加selete类型等的数据 Vue.$refs['组件ref'].asyncSetFormJsonDataArr(key,arr) key:目标key arr:设置的数组，select类型需要注意是二维数组|
-|Function|initializeForm|初始化方法|
+|Function|initializeForm|初始化方法,小程序中不要将该方法放于 onShow 生命周期内|
+|Function|returnFormData|直接获取组件内部 form 数据|
 
 ### formJson 字段配置说明
 
@@ -27,6 +28,7 @@
 |String|itemObj.type|input 的 type 字段|
 |Number|itemObj.maxlength|textarea 的 maxlength 字段|
 |Array|itemObj.dataArr|radio, checkbox, select 存放数据源字段，select 的数据源必须为二维数组，详情查看uview文档|
+|String|itemObj.slot|slot名称字段，显示在表单最右侧，同一组件要保证 slot 唯一性|
 |String|itemObj.key|dataArr内对应的 key 字段|
 |String|itemObj.value|dataArr内对应的 value 字段|
 |String|itemObj.showKey|selete,time, date, timerang 展示下拉框布尔值字段，每个组件作用域必须唯一|
