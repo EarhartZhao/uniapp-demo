@@ -3,8 +3,10 @@ export default [
     title: "输入框",
     type: "input",
     key: "input",
-    itemObj: {
+    inputOptions: {
       type: "text",
+    },
+    commonOptions: {
       slot: "btn"
     },
     placeholder: "请输入",
@@ -19,8 +21,8 @@ export default [
     title: "多行输入框",
     type: "textarea",
     key: "textarea",
-    itemObj: {
-      type: "text",
+    textareaOptions: {
+      maxlength: 130,
     },
     placeholder: "请输入",
     rule: {
@@ -29,13 +31,16 @@ export default [
       message: "textarea该字段必填",
       trigger: ["blur", "change"],
     },
-    viewBreak: true
+    commonOptions: {
+      viewBreak: true
+    }
+
   },
   {
     title: "单选框",
     type: "radio",
     key: "radio",
-    itemObj: {
+    commonOptions: {
       dataArr: [
         {
           key: "选项1",
@@ -52,6 +57,7 @@ export default [
       ],
       key: "key",
       value: "value",
+      viewBreak: true
     },
     placeholder: "请选择",
     rule: {
@@ -59,14 +65,13 @@ export default [
       required: true,
       message: "radio该字段必填",
       trigger: ["change"],
-    },
-    viewBreak: true
+    }
   },
   {
     title: "多选框",
     type: "checkbox",
     key: "checkbox",
-    itemObj: {
+    commonOptions: {
       dataArr: [
         {
           key: "选项1",
@@ -87,6 +92,7 @@ export default [
       ],
       key: "key",
       value: "value",
+      viewBreak: true
     },
     rule: {
       type: "array",
@@ -94,13 +100,12 @@ export default [
       message: "checkbox该字段必填",
       trigger: ["change"],
     },
-    viewBreak: true,
   },
   {
     title: "下拉框",
     type: "select",
     key: "select",
-    itemObj: {
+    commonOptions: {
       dataArr: [[ // 必须加一维数组
         {
           key: "选项1",
@@ -135,20 +140,21 @@ export default [
     title: "动态输入框",
     type: "dynamicInput",
     key: "dynamicInput",
-    itemObj: {
+    commonOptions: {
       type: "text",
       key: "title",
       value: "title",
+      viewBreak: true
     },
     placeholder: "请输入",
     rule: {},
-    viewBreak: true,
   },
   {
     title: "日期时间范围",
     type: "datetimerange",
     key: "datetimerange",
-    itemObj: {
+    commonOptions: {
+      viewBreak: true
     },
     placeholder: "请选择",
     rule: {
@@ -157,13 +163,12 @@ export default [
       message: "dynamicInput该字段必填",
       trigger: ["change"],
     },
-    viewBreak: true
   },
   {
     title: "时间",
     type: "time",
     key: "time",
-    itemObj: {
+    commonOptions: {
       showKey: "timeShow",
     },
     placeholder: "请选择",
@@ -178,7 +183,7 @@ export default [
     title: "日期",
     type: "date",
     key: "date",
-    itemObj: {
+    commonOptions: {
       showKey: "dateShow",
     },
     placeholder: "请选择",
@@ -205,7 +210,7 @@ export default [
     title: "时间范围",
     type: "timerang",
     key: "timerang",
-    itemObj: {
+    commonOptions: {
       showKey: "timerangShow",
     },
     placeholder: "请选择",
@@ -213,6 +218,21 @@ export default [
       type: "array",
       required: true,
       message: "timerang该字段必填",
+      trigger: ["change"],
+    },
+  },
+  {
+    title: "上传",
+    type: "upload",
+    key: "upload",
+    commonOptions: {
+      showKey: "",
+    },
+    placeholder: "请选择",
+    rule: {
+      type: "array",
+      required: true,
+      message: "upload该字段必填",
       trigger: ["change"],
     },
   },

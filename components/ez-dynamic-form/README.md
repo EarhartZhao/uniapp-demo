@@ -24,23 +24,30 @@
 |String|key|控件的 key 字段, 每个组件作用域必须唯一||
 |String|type|控件类型 可选: input, textarea, radio, checkbox, select, dynamicInput, datetimerange, time, date, datetime, timerang|
 |String|placeholder|控件 placeholder 字段|
-|Object|itemObj|每个控件的补充字段|
-|String|itemObj.type|input 的 type 字段|
-|Number|itemObj.maxlength|textarea 的 maxlength 字段|
-|Array|itemObj.dataArr|radio, checkbox, select 存放数据源字段，select 的数据源必须为二维数组，详情查看uview文档|
-|String|itemObj.slot|slot名称字段，显示在表单最右侧，同一组件要保证 slot 唯一性|
-|String|itemObj.key|dataArr内对应的 key 字段|
-|String|itemObj.value|dataArr内对应的 value 字段|
-|String|itemObj.showKey|selete,time, date, timerang 展示下拉框布尔值字段，每个组件作用域必须唯一|
-|Number|itemObj.maxDate|date 最大日期(时间戳)|
-|Number|itemObj.minDate|date 最小日期(时间戳)|
-|Number|itemObj.maxHour|time 最大小时|
-|Number|itemObj.minHour|time 最小小时|
-|Number|itemObj.maxMinute|time 最大分钟|
-|Number|itemObj.minMinute|time 最小分钟|
+|Object|inputOptions|类型 input 的补充字段，更多配置需要自定义，并参见uview文档|
+|String|inputOptions.type|input 的 type 字段|
+|Object|textareaOptions|类型 textarea 的补充字段，更多配置需要自定义，并参见uview文档|
+|Number|textareaOptions.maxlength|textarea 的 maxlength 字段|
+|Object|commonOptions|每个控件的公共补充字段|
+|Array|commonOptions.dataArr|radio, checkbox, select 存放数据源字段，select 的数据源必须为二维数组，详情查看uview文档|
+|String|commonOptions.slot|slot名称字段，显示在表单最右侧，同一组件要保证 slot 唯一性|
+|String|commonOptions.key|dataArr 内对应的 key 字段|
+|String|commonOptions.value|dataArr 内对应的 value 字段|
+|String|commonOptions.showKey|selete,time, date, timerang 展示下拉框布尔值字段，每个组件作用域必须唯一|
+|Boolean|commonOptions.viewBreak|换行|
+|Boolean|commonOptions.readOnly|预留|
+|Object|datetimeOptions|类型 date 和 time 的补充字段，更多配置需要自定义，并参见uview文档|
+|Number|datetimeOptions.maxDate|date 最大日期(时间戳)|
+|Number|datetimeOptions.minDate|date 最小日期(时间戳)|
+|Number|datetimeOptions.maxHour|time 最大小时|
+|Number|datetimeOptions.minHour|time 最小小时|
+|Number|datetimeOptions.maxMinute|time 最大分钟|
+|Number|datetimeOptions.minMinute|time 最小分钟|
+|Object|uploadOptions|类型 upload 的补充字段，更多配置需要自定义，并参见uview文档|
+|Boolean|uploadOptions.multiple|是否开启图片多选|
+|Number|uploadOptions.maxCount|最大选择图片的数量|
+|String|uploadOptions.accept|接受的文件类型|
 |Object|rule|表单验证数据，必须存在字段，数据为空表示不进行验证|
-|Boolean|viewBreak|换行|
-|Boolean|readOnly|预留|
 
 ### 使用说明
 

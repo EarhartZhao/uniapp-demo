@@ -9,7 +9,7 @@
     >
       <view
         v-for="(item, index) in formJson"
-        :class="item.viewBreak ? 'viewBreak' : ''"
+        :class="item.commonOptions.viewBreak ? 'viewBreak' : ''"
         :key="index"
       >
         <view class="bigTitle" v-if="item.bigTitle">{{ item.bigTitle }}</view>
@@ -27,7 +27,7 @@
             :disabled="disabled"
             border="none"
             :placeholder="item.placeholder"
-            :type="item.itemObj.type"
+            :type="item.inputOptions.type"
             inputAlign="right"
             @change="inputChange($event, item.key)"
             :clearable="false"
@@ -37,15 +37,14 @@
           }}</view>
 
           <!-- 动态slot -->
-          <view class="dynamic-slot" v-if="item.itemObj.slot">
+          <view class="dynamic-slot" v-if="item.commonOptions.slot">
             <view slot="right">
               <!-- #ifdef MP -->
-              <slot name="{{item.itemObj.slot}}"> </slot>
+              <slot name="{{item.commonOptions.slot}}"> </slot>
               <!-- #endif -->
 
               <!-- #ifdef H5 || APP-PLUS  -->
-              <!-- <slot :name="item.name"> -->
-              <slot :name="item.itemObj.slot"></slot>
+              <slot :name="item.commonOptions.slot"></slot>
               <!-- #endif -->
             </view>
           </view>
@@ -57,7 +56,7 @@
             @input="inputChange($event, item.key)"
             :disabled="disabled"
             count
-            :maxlength="item.itemObj.maxlength || 200"
+            :maxlength="item.textareaOptions.maxlength || 200"
             :placeholder="item.placeholder"
           ></u--textarea>
           <view
@@ -76,19 +75,19 @@
           >
             <u-radio
               :customStyle="{ marginRight: '16px' }"
-              v-for="(ite, ind) in item.itemObj.dataArr"
+              v-for="(ite, ind) in item.commonOptions.dataArr"
               :key="ind"
-              :label="ite[item.itemObj.key]"
-              :name="ite[item.itemObj.value]"
+              :label="ite[item.commonOptions.key]"
+              :name="ite[item.commonOptions.value]"
             >
             </u-radio>
           </u-radio-group>
           <view v-if="item.type == 'radio' && disabled" class="disabled-text">{{
             byKeyFindVal(
-              item.itemObj.value,
+              item.commonOptions.value,
               form[item.key],
-              item.itemObj.key,
-              item.itemObj.dataArr
+              item.commonOptions.key,
+              item.commonOptions.dataArr
             ) || ""
           }}</view>
 
@@ -101,10 +100,10 @@
             iconPlacement="right"
           >
             <u-checkbox
-              v-for="(ite, ind) in item.itemObj.dataArr"
+              v-for="(ite, ind) in item.commonOptions.dataArr"
               :key="ind"
-              :label="ite[item.itemObj.key]"
-              :name="ite[item.itemObj.value]"
+              :label="ite[item.commonOptions.key]"
+              :name="ite[item.commonOptions.value]"
             >
             </u-checkbox>
           </u-checkbox-group>
@@ -113,10 +112,10 @@
             class="disabled-text"
             >{{
               arrayDisabledText(
-                item.itemObj.value,
+                item.commonOptions.value,
                 form[item.key],
-                item.itemObj.key,
-                item.itemObj.dataArr
+                item.commonOptions.key,
+                item.commonOptions.dataArr
               ) || ""
             }}</view
           >
@@ -127,16 +126,16 @@
             :disabled="disabled"
             v-if="item.type == 'select'"
             @click="
-              popShow[item.itemObj.showKey] = disabled ? false : true;
+              popShow[item.commonOptions.showKey] = disabled ? false : true;
               hideKeyboard();
             "
           >
             <view>{{
               byKeyFindVal(
-                item.itemObj.value,
+                item.commonOptions.value,
                 form[item.key],
-                item.itemObj.key,
-                item.itemObj.dataArr[0]
+                item.commonOptions.key,
+                item.commonOptions.dataArr[0]
               ) || item.placeholder
             }}</view>
             <u-icon
@@ -145,19 +144,6 @@
               color="#909193"
             ></u-icon>
           </view>
-          <u-picker
-            v-if="item.type == 'select'"
-            :disabled="disabled"
-            :show="popShow[item.itemObj.showKey]"
-            :closeOnClickOverlay="true"
-            @confirm="
-              pickerConfirm($event, item.key, item.itemObj.value);
-              popShow[item.itemObj.showKey] = false;
-            "
-            @cancel="popShow[item.itemObj.showKey] = false"
-            :columns="item.itemObj.dataArr"
-            :keyName="[item.itemObj.key]"
-          ></u-picker>
 
           <!-- 动态输入框 -->
           <view class="dynamic" v-if="item.type == 'dynamicInput'">
@@ -168,14 +154,14 @@
                 :key="ind"
               >
                 <u--input
-                  :value="ite[item.itemObj.value]"
+                  :value="ite[item.commonOptions.value]"
                   @change="
-                    inputChange($event, item.key, ind, item.itemObj.value)
+                    inputChange($event, item.key, ind, item.commonOptions.value)
                   "
                   :disabled="disabled"
                   border="none"
                   :placeholder="item.placeholder"
-                  :type="item.itemObj.type"
+                  :type="item.commonOptions.type"
                   inputAlign="right"
                 ></u--input>
                 <u-icon
@@ -190,7 +176,7 @@
             <u-icon
               class="dynamic-right"
               v-if="!disabled"
-              @click="addDynamic(item.key, item.itemObj.value)"
+              @click="addDynamic(item.key, item.commonOptions.value)"
               name="plus-circle-fill"
               size="20"
               color="#19be6b"
@@ -236,7 +222,7 @@
             :disabled="disabled"
             v-if="item.type == 'date' || item.type == 'time'"
             @click="
-              popShow[item.itemObj.showKey] = disabled ? false : true;
+              popShow[item.commonOptions.showKey] = disabled ? false : true;
               hideKeyboard();
             "
           >
@@ -250,20 +236,20 @@
 
           <u-datetime-picker
             v-if="(item.type == 'date' || item.type == 'time') && !disabled"
-            :show="popShow[item.itemObj.showKey]"
+            :show="popShow[item.commonOptions.showKey]"
             :value="form[item.key]"
-            :minDate="item.itemObj.minDate || -631152000000"
-            :maxDate="item.itemObj.maxDate || 1893456000000"
-            :maxHour="item.itemObj.maxHour || 23"
-            :minHour="item.itemObj.minHour || 0"
-            :maxMinute="item.itemObj.maxMinute || 59"
-            :minMinute="item.itemObj.minMinute || 0"
+            :minDate="item.datetimeOptions.minDate || -631152000000"
+            :maxDate="item.datetimeOptions.maxDate || 1893456000000"
+            :maxHour="item.datetimeOptions.maxHour || 23"
+            :minHour="item.datetimeOptions.minHour || 0"
+            :maxMinute="item.datetimeOptions.maxMinute || 59"
+            :minMinute="item.datetimeOptions.minMinute || 0"
             :closeOnClickOverlay="true"
             @confirm="
-              uPickerConfirm($event, item.key, item.itemObj.value);
-              popShow[item.itemObj.showKey] = false;
+              uPickerConfirm($event, item.key, item.commonOptions.value);
+              popShow[item.commonOptions.showKey] = false;
             "
-            @cancel="popShow[item.itemObj.showKey] = false"
+            @cancel="popShow[item.commonOptions.showKey] = false"
             :mode="item.type"
           ></u-datetime-picker>
 
@@ -273,7 +259,7 @@
             :disabled="disabled"
             v-if="item.type == 'timerang'"
             @click="
-              popShow[item.itemObj.showKey] = disabled ? false : true;
+              popShow[item.commonOptions.showKey] = disabled ? false : true;
               hideKeyboard();
             "
           >
@@ -289,13 +275,42 @@
             v-if="item.type == 'timerang' && !disabled"
             :value="form[item.key]"
             @confrim="
-              uPickerConfirm($event, item.key, item.itemObj.value);
-              popShow[item.itemObj.showKey] = false;
+              uPickerConfirm($event, item.key, item.commonOptions.value);
+              popShow[item.commonOptions.showKey] = false;
             "
-            @cancel="popShow[item.itemObj.showKey] = false"
-            :show="popShow[item.itemObj.showKey]"
+            @cancel="popShow[item.commonOptions.showKey] = false"
+            :show="popShow[item.commonOptions.showKey]"
           ></ez-time-range>
         </u-form-item>
+
+        <!-- 上传 -->
+        <view v-if="item.type == 'upload'">
+          <u-upload
+            :accept="uploadOptions.accept || 'image'"
+            :fileList="form[item.key]"
+            @afterRead="afterRead"
+            @delete="deletePic"
+            :disabled="disabled"
+            :name="item.key"
+            :multiple="uploadOptions.multiple || true"
+            :maxCount="uploadOptions.maxCount || 2"
+          ></u-upload>
+        </view>
+
+        <!-- 下拉框 -->
+        <u-picker
+          v-if="item.type == 'select'"
+          :disabled="disabled"
+          :show="popShow[item.commonOptions.showKey]"
+          :closeOnClickOverlay="true"
+          @confirm="
+            pickerConfirm($event, item.key, item.commonOptions.value);
+            popShow[item.commonOptions.showKey] = false;
+          "
+          @cancel="popShow[item.commonOptions.showKey] = false"
+          :columns="item.commonOptions.dataArr"
+          :keyName="[item.commonOptions.key]"
+        ></u-picker>
       </view>
     </u--form>
   </view>
@@ -356,10 +371,16 @@ export default {
     this.initializeForm();
   },
   methods: {
+    afterRead(event) {
+      this.$emit('afterRead', event)
+    },
+    deletePic(event) {
+      this.$emit('deletePic', event)
+    },
     asyncSetFormJsonDataArr(key, arr) {
       const i = this.formJson.findIndex((ele) => ele.key == key);
       if (i == -1) return;
-      this.$set(this.formJson[i].itemObj, "dataArr", arr);
+      this.$set(this.formJson[i].commonOptions, "dataArr", arr);
       this.initializeForm();
     },
     filterTimerang(val) {
@@ -439,14 +460,14 @@ export default {
         }
         const showType = ["select", "time", "date", "timerang"];
         if (showType.includes(ele.type)) {
-          this.$set(this.popShow, ele.itemObj.showKey, false);
+          this.$set(this.popShow, ele.commonOptions.showKey, false);
         }
       });
       this.$set(this, "rules", rules);
       this.$set(this, "form", form);
       this.$set(this, "validateList", validateList);
     },
-    returnFormData(){
+    returnFormData() {
       return this.form;
     },
     submit() {
