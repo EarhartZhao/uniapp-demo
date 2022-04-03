@@ -8,7 +8,8 @@
       height="calc(100vh - 100rpx)"
       ref="dynamicForm"
     >
-    <view name="btn" @click="clickBtn">btn</view>
+      <view slot="slot-0" @click="clickBtn">inputSlot111</view>
+      <view slot="slot-1" @click="clickBtn">textareaSlot222</view>
     </ez-dynamic-form>
     <formBottom>
       <u-button
@@ -39,19 +40,19 @@ export default {
   data() {
     return {
       formJson,
-      mockData:{},
+      mockData: {},
       disabled: true,
     };
   },
-  created(){
+  created() {
     setTimeout(() => {
       this.mockData = mockData;
-      console.log('this.mockData', this.mockData)
+      console.log("this.mockData", this.mockData);
     }, 3000);
   },
   methods: {
-    clickBtn(){
-      console.log('click slot btn')
+    clickBtn() {
+      console.log("click slot btn");
     },
     submit() {
       this.$refs.dynamicForm.submit().then((r) => {

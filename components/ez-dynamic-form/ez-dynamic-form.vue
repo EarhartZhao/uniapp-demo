@@ -15,39 +15,28 @@
         <view class="bigTitle" v-if="item.bigTitle">{{ item.bigTitle }}</view>
         <u-form-item
           :label="item.title"
-          :prop="[item.key]"
+          :prop="item.key"
           :required="item.rule.required && !disabled"
           class="testclass"
           borderBottom
         >
           <!-- 输入框 -->
-          <u--input
-            v-if="item.type == 'input' && !disabled"
-            :value="form[item.key]"
-            :disabled="disabled"
-            border="none"
-            :placeholder="item.placeholder"
-            :type="item.inputOptions.type"
-            inputAlign="right"
-            @change="inputChange($event, item.key)"
-            :clearable="false"
-          ></u--input>
-          <view v-if="item.type == 'input' && disabled" class="disabled-text">{{
-            form[item.key]
-          }}</view>
-
-          <!-- 动态slot -->
-          <view class="dynamic-slot" v-if="item.commonOptions.slot">
-            <view slot="right">
-              <!-- #ifdef MP -->
-              <slot name="{{item.commonOptions.slot}}"> </slot>
-              <!-- #endif -->
-
-              <!-- #ifdef H5 || APP-PLUS  -->
-              <slot :name="item.commonOptions.slot"></slot>
-              <!-- #endif -->
-            </view>
-          </view>
+          <block v-if="item.type == 'input'">
+            <u--input
+              v-if="!disabled"
+              :value="form[item.key]"
+              :disabled="disabled"
+              border="none"
+              :placeholder="item.placeholder"
+              :type="item.inputOptions.type"
+              inputAlign="right"
+              @change="inputChange($event, item.key)"
+              :clearable="false"
+            ></u--input>
+            <view v-if="disabled" class="disabled-text">{{
+              form[item.key]
+            }}</view>
+          </block>
 
           <!-- 多行输入框 -->
           <u--textarea
@@ -281,19 +270,32 @@
             @cancel="popShow[item.commonOptions.showKey] = false"
             :show="popShow[item.commonOptions.showKey]"
           ></ez-time-range>
+
+          <!-- 动态slot -->
+          <view class="dynamic-slot">
+            <view slot="right">
+              <!-- #ifdef MP -->
+              <slot name="slot-{{index}}" />
+              <!-- #endif -->
+
+              <!-- #ifdef H5 || APP-PLUS  -->
+              <slot :name="`slot-${index}`" />
+              <!-- #endif -->
+            </view>
+          </view>
         </u-form-item>
 
         <!-- 上传 -->
         <view v-if="item.type == 'upload'">
           <u-upload
-            :accept="uploadOptions.accept || 'image'"
+            :accept="item.uploadOptions.accept || 'image'"
             :fileList="form[item.key]"
             @afterRead="afterRead"
             @delete="deletePic"
             :disabled="disabled"
             :name="item.key"
-            :multiple="uploadOptions.multiple || true"
-            :maxCount="uploadOptions.maxCount || 2"
+            :multiple="item.uploadOptions.multiple || true"
+            :maxCount="item.uploadOptions.maxCount || 2"
           ></u-upload>
         </view>
 
@@ -309,7 +311,7 @@
           "
           @cancel="popShow[item.commonOptions.showKey] = false"
           :columns="item.commonOptions.dataArr"
-          :keyName="[item.commonOptions.key]"
+          :keyName="item.commonOptions.key"
         ></u-picker>
       </view>
     </u--form>
@@ -372,10 +374,10 @@ export default {
   },
   methods: {
     afterRead(event) {
-      this.$emit('afterRead', event)
+      this.$emit("afterRead", event);
     },
     deletePic(event) {
-      this.$emit('deletePic', event)
+      this.$emit("deletePic", event);
     },
     asyncSetFormJsonDataArr(key, arr) {
       const i = this.formJson.findIndex((ele) => ele.key == key);
@@ -449,6 +451,7 @@ export default {
         validateList.push(ele.key);
         switch (ele.type) {
           case "dynamicInput":
+          case "upload":
             form[ele.key] = [];
             break;
           case "select":
@@ -458,10 +461,24 @@ export default {
             form[ele.key] = "";
             break;
         }
+        // 组件初始化 show 字段
         const showType = ["select", "time", "date", "timerang"];
         if (showType.includes(ele.type)) {
           this.$set(this.popShow, ele.commonOptions.showKey, false);
         }
+
+        // 解决h5，app 对象为空报错问题
+        const options = [
+          "commonOptions",
+          "inputOptions",
+          "textareaOptions",
+          "datetimeOptions",
+          "uploadOptions",
+        ];
+        const hasOptions = Object.keys(ele);
+        options
+          .filter((e) => !hasOptions.includes(e))
+          .map((e) => (ele[e] = {}));
       });
       this.$set(this, "rules", rules);
       this.$set(this, "form", form);

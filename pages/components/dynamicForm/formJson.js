@@ -6,9 +6,6 @@ export default [
     inputOptions: {
       type: "text",
     },
-    commonOptions: {
-      slot: "btn"
-    },
     placeholder: "请输入",
     rule: {
       type: "string",
@@ -32,7 +29,7 @@ export default [
       trigger: ["blur", "change"],
     },
     commonOptions: {
-      viewBreak: true
+      viewBreak: true,
     }
 
   },
@@ -57,7 +54,7 @@ export default [
       ],
       key: "key",
       value: "value",
-      viewBreak: true
+      viewBreak: true,
     },
     placeholder: "请选择",
     rule: {

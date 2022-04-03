@@ -24,18 +24,18 @@
 |String|key|控件的 key 字段, 每个组件作用域必须唯一||
 |String|type|控件类型 可选: input, textarea, radio, checkbox, select, dynamicInput, datetimerange, time, date, datetime, timerang|
 |String|placeholder|控件 placeholder 字段|
+|--|--|无需配置，直接在父级使用。显示在表单最右侧，从索引0开始计算 eg:<view slot="slot-0">btn</view>|
 |Object|inputOptions|类型 input 的补充字段，更多配置需要自定义，并参见uview文档|
 |String|inputOptions.type|input 的 type 字段|
 |Object|textareaOptions|类型 textarea 的补充字段，更多配置需要自定义，并参见uview文档|
 |Number|textareaOptions.maxlength|textarea 的 maxlength 字段|
 |Object|commonOptions|每个控件的公共补充字段|
 |Array|commonOptions.dataArr|radio, checkbox, select 存放数据源字段，select 的数据源必须为二维数组，详情查看uview文档|
-|String|commonOptions.slot|slot名称字段，显示在表单最右侧，同一组件要保证 slot 唯一性|
 |String|commonOptions.key|dataArr 内对应的 key 字段|
 |String|commonOptions.value|dataArr 内对应的 value 字段|
 |String|commonOptions.showKey|selete,time, date, timerang 展示下拉框布尔值字段，每个组件作用域必须唯一|
 |Boolean|commonOptions.viewBreak|换行|
-|Boolean|commonOptions.readOnly|预留|
+|Boolean|commonOptions.readOnly|只读|
 |Object|datetimeOptions|类型 date 和 time 的补充字段，更多配置需要自定义，并参见uview文档|
 |Number|datetimeOptions.maxDate|date 最大日期(时间戳)|
 |Number|datetimeOptions.minDate|date 最小日期(时间戳)|
