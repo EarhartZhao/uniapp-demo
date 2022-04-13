@@ -179,7 +179,8 @@
             :value="form[item.key]"
             type="datetimerange"
             :disabled="disabled"
-            border="false"
+            :hideSecond="true"
+            :border="false"
             hide-second="true"
             rangeSeparator="至"
           />
@@ -197,6 +198,7 @@
             :value="form[item.key]"
             start="1900-1-01"
             end="2040-12-31"
+            :hideSecond="true"
             @change="inputChange($event, item.key)"
           />
           <view
@@ -223,25 +225,6 @@
             ></u-icon>
           </view>
 
-          <u-datetime-picker
-            v-if="(item.type == 'date' || item.type == 'time') && !disabled"
-            :show="popShow[item.commonOptions.showKey]"
-            :value="form[item.key]"
-            :minDate="item.datetimeOptions.minDate || -631152000000"
-            :maxDate="item.datetimeOptions.maxDate || 1893456000000"
-            :maxHour="item.datetimeOptions.maxHour || 23"
-            :minHour="item.datetimeOptions.minHour || 0"
-            :maxMinute="item.datetimeOptions.maxMinute || 59"
-            :minMinute="item.datetimeOptions.minMinute || 0"
-            :closeOnClickOverlay="true"
-            @confirm="
-              uPickerConfirm($event, item.key, item.commonOptions.value);
-              popShow[item.commonOptions.showKey] = false;
-            "
-            @cancel="popShow[item.commonOptions.showKey] = false"
-            :mode="item.type"
-          ></u-datetime-picker>
-
           <!-- 时间范围 -->
           <view
             class="select-box"
@@ -259,17 +242,6 @@
               color="#909193"
             ></u-icon>
           </view>
-
-          <ez-time-range
-            v-if="item.type == 'timerang' && !disabled"
-            :value="form[item.key]"
-            @confrim="
-              uPickerConfirm($event, item.key, item.commonOptions.value);
-              popShow[item.commonOptions.showKey] = false;
-            "
-            @cancel="popShow[item.commonOptions.showKey] = false"
-            :show="popShow[item.commonOptions.showKey]"
-          ></ez-time-range>
 
           <!-- 动态slot -->
           <view class="dynamic-slot">
@@ -313,6 +285,38 @@
           :columns="item.commonOptions.dataArr"
           :keyName="item.commonOptions.key"
         ></u-picker>
+
+        <!-- 日期 -->
+        <u-datetime-picker
+          v-if="(item.type == 'date' || item.type == 'time') && !disabled"
+          :show="popShow[item.commonOptions.showKey]"
+          :value="form[item.key]"
+          :minDate="item.datetimeOptions.minDate || -631152000000"
+          :maxDate="item.datetimeOptions.maxDate || 1893456000000"
+          :maxHour="item.datetimeOptions.maxHour || 23"
+          :minHour="item.datetimeOptions.minHour || 0"
+          :maxMinute="item.datetimeOptions.maxMinute || 59"
+          :minMinute="item.datetimeOptions.minMinute || 0"
+          :closeOnClickOverlay="true"
+          @confirm="
+            uPickerConfirm($event, item.key, item.commonOptions.value);
+            popShow[item.commonOptions.showKey] = false;
+          "
+          @cancel="popShow[item.commonOptions.showKey] = false"
+          :mode="item.type"
+        ></u-datetime-picker>
+
+        <!-- 时间范围 -->
+        <ez-time-range
+          v-if="item.type == 'timerang' && !disabled"
+          :value="form[item.key]"
+          @confrim="
+            uPickerConfirm($event, item.key, item.commonOptions.value);
+            popShow[item.commonOptions.showKey] = false;
+          "
+          @cancel="popShow[item.commonOptions.showKey] = false"
+          :show="popShow[item.commonOptions.showKey]"
+        ></ez-time-range>
       </view>
     </u--form>
   </view>

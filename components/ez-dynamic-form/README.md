@@ -47,7 +47,7 @@
 |Boolean|uploadOptions.multiple|是否开启图片多选|
 |Number|uploadOptions.maxCount|最大选择图片的数量|
 |String|uploadOptions.accept|接受的文件类型|
-|Object|rule|表单验证数据，必须存在字段，数据为空表示不进行验证|
+|Object|rule|表单验证数据，必须存在字段，数据为空表示不进行验证，暂不支持嵌套函数等复杂验证|
 
 ### 使用说明
 
@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     submit() {
-      this.$refs.dynamicForm.submit().then((r) => {
+      this.$refs.dynamicForm.submit().then((r) => { 
         console.log("formData", r);
         if (r) {
           //验证通过
@@ -87,7 +87,7 @@ export default {
 
 ### 样式说明
 
-> 需要在根目录的 uni.scss 文件内引入 dynamicForm.scss 
+> 需要在根目录的 uni.scss 文件内引入[dynamicForm.scss](https://github.com/EarhartZhao/uniapp-demo/blob/main/assets/styles/global/dynamicForm.scss)  
 
 ### 其他
 
